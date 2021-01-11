@@ -1,3 +1,10 @@
+This project was based on https://github.com/cedricxie/second_ros 
+
+I debugged the original repo and applied it with Pointpillars.
+
+Below is the readme of the original repo
+
+
 # Run SECOND as a ROS Node
 
 This project is still work in progress. Feel free to make pull requests and improve the performance together.
