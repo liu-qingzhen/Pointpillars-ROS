@@ -6,7 +6,7 @@ You need to change the paths in scripts/second_ros to your own file correctly
 
 Also, Rviz should be installed, the rosbag of kitti needs to be run.
 
-Below is the readme of the original repo
+Below is the readme of the original repo with little modification
 
 
 # Run SECOND as a ROS Node
@@ -21,11 +21,12 @@ Make sure to modify the paths in the scripts based on your setting accordingly.
 ### Step 1: build package
 ```
 mkdir catkin_ws && cd catkin_ws
-git clone https://github.com/cedricxie/second_ros
+git clone https://github.com/liu-qingzhen/Pointpillars-ROS
+cd src
 catkin_make && source devel/setup.bash
 ```
 
-### Step 2: create environment for SECOND
+### Step 2: create environment for SECOND (if you already created the environment for seconds or pointpillars, then no need to create this one)
 Follow installation and dataset preparation instruction at https://github.com/traveller59/second.pytorch. Miniconda is used to configure the dependencies. Notice that if you have rospy installed in Python 3, you can still use rosrun to launch SECOND as a ROS node.
 
 ```
