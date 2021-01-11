@@ -4,6 +4,8 @@ I debugged the original repo and applied it with Pointpillars.
 
 You need to change the paths in scripts/second_ros to your own file correctly
 
+Also, Rviz should be installed, the rosbag of kitti needs to be run.
+
 Below is the readme of the original repo
 
 
