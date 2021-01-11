@@ -2,6 +2,8 @@ This project was based on https://github.com/cedricxie/second_ros
 
 I debugged the original repo and applied it with Pointpillars.
 
+You need to change the paths in scripts/second_ros to your own file correctly
+
 Below is the readme of the original repo
 
 
