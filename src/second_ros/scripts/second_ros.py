@@ -8,7 +8,7 @@ from std_msgs.msg import Header
 from jsk_recognition_msgs.msg import BoundingBox, BoundingBoxArray
 
 import sys
-path_model = "/home/hradt/VoxelNet/catkin_ws/src/second_ros/second/"
+path_model = "/home/lzy/catkin_ws/src/second_ros/second/"
 sys.path.append(path_model)
 #print sys.path
 
@@ -164,7 +164,7 @@ class Processor_ROS:
     def __init__(self, calib_path, config_path, ckpt_path):
         self.points = None
 
-        self.json_setting = Settings(str('/home/hradt/' + ".kittiviewerrc"))
+        self.json_setting = Settings(str('/home/lzy/' + ".kittiviewerrc"))
         # self.config_path = self.json_setting.get("latest_vxnet_cfg_path", "")
         self.calib_path = calib_path
         self.config_path = config_path
@@ -176,6 +176,7 @@ class Processor_ROS:
         self.inference_ctx = None
 
     def initialize(self):
+        print(self.calib_path)
         self.read_calib()
         self.build_vxnet()
         self.load_vxnet()
@@ -209,7 +210,6 @@ class Processor_ROS:
 
     def read_calib(self,
                    extend_matrix=True):
-        # print(self.calib_path)
         print("Start read_calib...")
         calib_info= {'calib_path': self.calib_path}
         with open(self.calib_path, 'r') as f:
@@ -259,6 +259,9 @@ class Processor_ROS:
         # add image shape info for lidar point cloud preprocessing
         calib_info["img_shape"] = np.array([375, 1242]) # kitti image size: height, width
         self.calib_info = calib_info
+        img_idx = np.array([000000])
+        calib_info["image_idx"] = img_idx
+        print(calib_info)
         print("Read calib file succeeded.")
 
     def build_vxnet(self):
@@ -446,9 +449,9 @@ if __name__ == '__main__':
     #save_model_dir = os.path.join('../voxelnet/save_model', args.tag)
     save_model_dir = os.path.join(path_model + '/save_model', 'pre_trained_car')
     # initializing second
-    calib_path = '/home/hradt/shared_dir/kitti/object/training/calib/000000.txt'
-    config_path = '/home/hradt/VoxelNet/catkin_ws/src/second_ros/second/second/configs/car.config'
-    ckpt_path = '/home/hradt/VoxelNet/catkin_ws/src/second_ros/second/pretrained_models/car/voxelnet-204270.tckpt'
+    calib_path = '/home/lzy/calib/000000.txt'
+    config_path = '/home/lzy/second.pytorch/second/configs/pointpillars/car/xyres_16.proto'
+    ckpt_path = '/media/lzy/T7/model_12.22/voxelnet-321350.tckpt'
     proc = Processor_ROS(calib_path, config_path, ckpt_path)
     proc.initialize()
 
@@ -456,7 +459,9 @@ if __name__ == '__main__':
     rospy.init_node('second_ros_node')
 
     # subscriber
-    sub_ = rospy.Subscriber("velodyne_points", PointCloud2, velo_callback, queue_size=1)
+    # sub_ = rospy.Subscriber("velodyne_points", PointCloud2, velo_callback, queue_size=1)
+    sub_ = rospy.Subscriber("/kitti/velo/pointcloud", PointCloud2, velo_callback, queue_size=1)
+
 
     # publisher
     pub_velo = rospy.Publisher("velodyne_points_modified", PointCloud2, queue_size=1)
