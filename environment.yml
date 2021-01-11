@@ -1,0 +1,19 @@
+name: py36
+channels:
+    - conda-forge
+    - pytorch
+dependencies:
+    - python==3.6.6
+    - mkl
+    - pytorch==0.4.1
+    - torchvision
+    - shapely 
+    - fire
+    - pybind11 
+    - pyqtgraph 
+    - tensorboardX 
+    - protobuf
+    - numba
+    - scikit-image
+    - pyopengl
+    - anaconda:pillow

@@ -1,0 +1,11 @@
+<launch>
+
+  <!-- <remap from="velodyne_points" to="kitti/velo/pointcloud"/> -->
+
+  <node name="second_ros" type="second_ros.py" pkg="second_ros" output="screen">
+  
+  </node>
+
+   <node type="rviz" name="rviz" pkg="rviz" args="-d $(find second_ros)/config/second.rviz" />
+
+</launch>
